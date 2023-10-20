@@ -1,15 +1,22 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { FiHome, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
-import { FaBarsStaggered, FaDAndDBeyond, FaHackerNews, FaNewspaper, FaPooStorm } from "react-icons/fa6";
+import {
+  FaBarsStaggered,
+  FaDAndDBeyond,
+  FaHackerNews,
+  FaLitecoinSign,
+  FaNewspaper,
+  FaPooStorm,
+} from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
-import { Divider, Link, NavbarItem } from "@nextui-org/react";
+import { Divider, Link } from "@nextui-org/react";
 import { usePathname } from "next/dist/client/components/navigation";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const userItems = [
     {
@@ -34,7 +41,6 @@ const Sidebar: React.FC = () => {
       route: "/settings",
     },
   ];
-
 
   const adminItems = [
     {
@@ -81,8 +87,6 @@ const Sidebar: React.FC = () => {
 
   const isAdmin = true;
 
-
-
   return (
     <div className="flex flex-col h-full">
       <nav
@@ -125,6 +129,24 @@ const Sidebar: React.FC = () => {
                   <Link href={route}>{name}</Link>
                 </li>
               ))}
+
+          {/* TODO : We will do check a user authenticate or not */}
+          <Divider className="my-4" />
+          <li>
+            <Link
+              className={
+                pathname === "/authenticate/login"
+                  ? "text-lg   bg-cyan-500 text-white flex space-x-2 items-center p-2 rounded-2xl font-semibold"
+                  : "text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2"
+              }
+              href="/authenticate/login"
+            >
+              <span className="text-xl">
+                <FaLitecoinSign />
+              </span>
+              <span className="mt-1">Login</span>
+            </Link>
+          </li>
         </ul>
       </nav>
 

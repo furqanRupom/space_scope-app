@@ -1,9 +1,9 @@
 import { NextAuthProvider } from "@/Providers/NextAuthProvider";
-import "./globals.css";
+import "../globals.css";
 import type { Metadata } from "next";
-import {  Sora } from "next/font/google";
+import { Sora } from "next/font/google";
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Providers } from "./providers/providers";
+import { Providers } from "../providers/providers";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -25,17 +25,12 @@ export default function RootLayout({
       <body className={sora.className}>
         <NextAuthProvider>
           <Providers>
-
             <main className="flex">
               <div>
-              <Sidebar />
-
+                <Sidebar />
               </div>
 
-             <div className="flex-grow mt-20 lg:mt-0">
-              {children}
-
-             </div>
+              <div className="flex-grow mt-20 lg:mt-0">{children}</div>
             </main>
           </Providers>
         </NextAuthProvider>
