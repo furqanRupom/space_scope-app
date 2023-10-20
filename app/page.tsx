@@ -1,3 +1,6 @@
+import CircleCharts from "@/components/CircleCharts/CircleCharts";
+import HomeCard from "@/components/HomeCard/HomeCard";
+import SideSection from "@/components/SideSection/SideSection";
 import SpaceCharts from "@/components/SpaceCharts/SpaceCharts";
 import TopAvator from "@/components/TopAvator/TopAvator"
 
@@ -12,15 +15,13 @@ export default function Home() {
 
           <div className="mt-12">
          <SpaceCharts />
+         <HomeCard />
 
           </div>
         </div>
-        <div className="bg-gray-50 ">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas,
-          perferendis labore iste dolore culpa praesentium ea voluptatum, facere
-          natus eum, quam distinctio explicabo nostrum sequi magnam rem iure
-          sapiente itaque consequatur debitis! Animi nesciunt sequi enim autem
-          debitis assumenda.
+        <div className="bg-gray-50 p-5">
+         <SideSection />
+         <CircleCharts />
         </div>
       </section>
     </main>

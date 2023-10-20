@@ -71,7 +71,6 @@ const SpaceCharts = () => {
             </defs>
             <XAxis dataKey="name" />
             <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area
               type="monotone"
