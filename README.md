@@ -13,3 +13,4 @@
  4. TailwindCSS
  5. NextAuth
  6. Next UI
+ 7. Sooner (Toast)
