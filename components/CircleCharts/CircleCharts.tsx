@@ -32,7 +32,7 @@ const CircleCharts = () => {
     <div className="mr-10">
 
 
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col my-5">
         <Tabs aria-label="Dynamic tabs" items={tabs}>
           {(item) => (
             <Tab key={item.id} title={item.label}>

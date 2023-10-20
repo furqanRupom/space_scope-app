@@ -84,12 +84,12 @@ const Sidebar: React.FC = () => {
 
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <nav
         className={
           isOpen
-            ? "py-8 px-3  bg-gray-50 min-h-screen w-52 z-50 translate-x-0 fixed lg:static duration-200"
-            : "py-8 px-3  bg-gray-50 min-h-screen -translate-x-96 duration-200 absolute"
+            ? "py-8 px-3  bg-gray-50 min-h-screen lg:h-full  w-52 z-50 translate-x-0 fixed lg:relative duration-200"
+            : "py-8 px-3  bg-gray-50 min-h-screen h-full  -translate-x-96 duration-200 absolute"
         }
       >
         <div>
@@ -130,7 +130,6 @@ const Sidebar: React.FC = () => {
 
       {isOpen ? (
         <div className="w-full z-50 bg-white lg:hidden">
-
           <button
             onClick={toggleSidebar}
             className="text-cyan-500 text-2xl absolute top-4 right-4 duration-200 hover:scale-105"
@@ -152,7 +151,6 @@ const Sidebar: React.FC = () => {
           >
             <FaBarsStaggered />
           </button>
-
         </div>
       )}
     </div>

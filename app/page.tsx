@@ -1,6 +1,7 @@
 import CircleCharts from "@/components/CircleCharts/CircleCharts";
 import HomeCard from "@/components/HomeCard/HomeCard";
 import SideSection from "@/components/SideSection/SideSection";
+import SmallTable from "@/components/SmallTable/SmallTable";
 import SpaceCharts from "@/components/SpaceCharts/SpaceCharts";
 import TopAvator from "@/components/TopAvator/TopAvator"
 
@@ -22,6 +23,7 @@ export default function Home() {
         <div className="bg-gray-50 p-5">
          <SideSection />
          <CircleCharts />
+         <SmallTable />
         </div>
       </section>
     </main>
