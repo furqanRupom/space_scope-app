@@ -3,8 +3,16 @@ import Link from "next/link"
 import React from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa'; // Import the appropriate React Icons components
 import { FaUser } from 'react-icons/fa6';
+import {useForm} from "react-hook-form"
 
 const SignUpForm = () => {
+
+  const {register,reset,handleSubmit} = useForm()
+  const onSubmit = async (data:{}) =>{
+    console.log(data)
+    reset();
+  }
+
   return (
     <div className="bg-white">
       <div className="p-8 lg:w-1/2 mx-auto">
@@ -29,13 +37,14 @@ const SignUpForm = () => {
           <p className="text-center text-sm text-gray-500 font-light">
             Or sign up with credentials
           </p>
-          <form className="mt-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
             <div className="relative">
               <input
                 className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600 transition rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                 id="name"
                 type="text"
                 placeholder="Full Name"
+                {...register("name")}
               />
               <div className="absolute left-0 inset-y-0 flex items-center">
                 <FaUser className="h-7 w-7 ml-3 text-gray-400 p-1" />
@@ -47,6 +56,7 @@ const SignUpForm = () => {
                 id="email"
                 type="text"
                 placeholder="Email"
+                {...register("email")}
               />
               <div className="absolute left-0 inset-y-0 flex items-center">
                 <FaGoogle className="h-7 w-7 ml-3 text-gray-400 p-1" />
@@ -58,6 +68,7 @@ const SignUpForm = () => {
                 id="password"
                 type="password"
                 placeholder="Password"
+                {...register("password")}
               />
               <div className="absolute left-0 inset-y-0 flex items-center">
                 <FaGoogle className="h-7 w-7 ml-3 text-gray-400 p-1" />
