@@ -1,9 +1,13 @@
 "use client"
 import { Avatar, Image } from "@nextui-org/react";
 import React from "react";
+import {useSession} from "next-auth/react"
 import { FaUserFriends, FaCamera, FaComment } from "react-icons/fa"; // Import appropriate React icons
 
 const ProfileCard = () => {
+  const {data:session} = useSession()
+  const user = session?.user
+
   return (
     <div className="p-16">
       <div className="p-8 bg-white shadow mt-24">
@@ -27,7 +31,7 @@ const ProfileCard = () => {
               {/* TODO : We will add later our authenticate user image */}
               {/* <FaUserFriends className="h-24 w-24" />{" "} */}
               <Avatar
-                src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"
+                src={user?.image as string}
                 className="w-48 h-48 text-large"
               />
 
@@ -45,8 +49,9 @@ const ProfileCard = () => {
         </div>
         <div className="mt-20 text-center border-b pb-12">
           <h1 className="text-4xl font-medium text-gray-700">
-            Jessica Jones, <span className="font-light text-gray-500">27</span>
+            {user?.name}, <span className="font-light text-gray-500">21</span>
           </h1>
+          <p className="font-light text-gray-600 mt-3">{user?.email}</p>
           <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>
           <p className="mt-8 text-gray-500">
             Solution Manager - Creative Tim Officer

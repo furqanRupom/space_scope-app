@@ -4,9 +4,12 @@ import {FaEarthAmericas} from "react-icons/fa6"
 import {AiFillMessage} from "react-icons/ai"
 import {IoNotificationsSharp} from "react-icons/io5"
 import { Avatar } from "@nextui-org/react"
+import {useSession} from "next-auth/react"
 
 
 const TopAvator = () => {
+  const {data:session} = useSession();
+  const user = session?.user
   return (
     <div className="w-full bg-gray-50 px-10 lg:px-0  lg:py-6">
       <div className="flex justify-between items-center">
@@ -26,13 +29,13 @@ const TopAvator = () => {
             <IoNotificationsSharp className="cursor-pointer hover:text-cyan-600" />
           </div>
 
-
-
           {/* TODO : WE will add avator later */}
           <Avatar
             isBordered
             color="default"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+            src={
+              user?.image as string || "https://i.pravatar.cc/150?u=a042581f4e29026024d"
+            }
           />
         </div>
       </div>

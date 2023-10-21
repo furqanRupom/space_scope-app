@@ -1,10 +1,41 @@
 "use client";
 
 import Link from "next/link";
+import {signIn} from "next-auth/react"
 import React from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa"; // Import the appropriate React Icons components
-
+import {useForm} from "react-hook-form"
+import {useRouter} from "next/navigation"
+import { toast, Toaster } from "sonner";
+import SocialLogin from "../SocialLogin/SocialLogin";
 const LoginForm = () => {
+
+  const {register,reset,handleSubmit} = useForm();
+  const router = useRouter();
+  const onSubmit = async(data:{}) =>{
+
+    try {
+
+        const { email, password }: any = data;
+        const res = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+
+        if (res) {
+          toast.success('User Login Successfully')
+          router.push("/");
+        }
+
+    } catch (error:any) {
+        console.log(error.message)
+    }
+
+
+  }
+
+
   return (
     <div className="bg-white">
       <div className="p-8 lg:w-1/2 mx-auto">
@@ -12,30 +43,22 @@ const LoginForm = () => {
           <p className="text-center text-sm text-gray-400 font-light">
             Sign In with
           </p>
-          <div>
-            <div className="flex items-center justify-center space-x-4 mt-3">
-              <button className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-cyan-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                <FaGithub className="w-6 h-6 mr-3" />
-                Github
-              </button>
-              <button className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-cyan-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                <FaGoogle className="w-6 h-6 mr-3" />
-                Google
-              </button>
-            </div>
-          </div>
+
+          <SocialLogin />
+
         </div>
         <div className="bg-gray-100 rounded-b-lg py-12 px-4 lg:px-24">
           <p className="text-center text-sm text-gray-500 font-light">
             Or sign In with credentials
           </p>
-          <form className="mt-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
             <div className="relative">
               <input
                 className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600 transition rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                 id="email"
                 type="text"
                 placeholder="Email"
+                {...register("email")}
               />
               <div className="absolute left-0 inset-y-0 flex items-center">
                 <FaGoogle className="h-7 w-7 ml-3 text-gray-400 p-1" />
@@ -47,6 +70,7 @@ const LoginForm = () => {
                 id="password"
                 type="password"
                 placeholder="Password"
+                {...register("password")}
               />
               <div className="absolute left-0 inset-y-0 flex items-center">
                 <FaGoogle className="h-7 w-7 ml-3 text-gray-400 p-1" />
@@ -73,13 +97,17 @@ const LoginForm = () => {
               </label>
             </div>
             <div className="flex items-center justify-center mt-8">
-              <button className="text-white py-2 px-4 uppercase rounded bg-cyan-500 hover:bg-cyan-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+              <button
+                type="submit"
+                className="text-white py-2 px-4 uppercase rounded bg-cyan-500 hover:bg-cyan-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+              >
                 Login
               </button>
             </div>
           </form>
         </div>
       </div>
+      <Toaster richColors position="top-center" />
     </div>
   );
 };

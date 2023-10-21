@@ -36,6 +36,7 @@ export default function RootLayout({
               }
 
               <div className="flex-grow mt-20 lg:mt-0">{children}</div>
+          
             </main>
           </Providers>
         </NextAuthProvider>

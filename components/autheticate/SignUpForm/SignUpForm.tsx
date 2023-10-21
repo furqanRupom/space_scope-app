@@ -1,17 +1,26 @@
-"use client"
-import Link from "next/link"
-import React from 'react';
-import { FaGithub, FaGoogle } from 'react-icons/fa'; // Import the appropriate React Icons components
-import { FaUser } from 'react-icons/fa6';
-import {useForm} from "react-hook-form"
+"use client";
+import Link from "next/link";
+import React from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa"; // Import the appropriate React Icons components
+import { FaUser } from "react-icons/fa6";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast, Toaster } from "sonner";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUpForm = () => {
-
-  const {register,reset,handleSubmit} = useForm()
-  const onSubmit = async (data:{}) =>{
-    console.log(data)
-    reset();
-  }
+  const { register, reset, handleSubmit } = useForm();
+  const onSubmit = async (data: {}) => {
+    try {
+      const { name, email, password }: any = data;
+      const res = await axios.post("/api/signup", { name, email, password });
+      toast.success("user successfully created");
+      reset();
+      return res.data;
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -20,18 +29,9 @@ const SignUpForm = () => {
           <p className="text-center text-sm text-gray-400 font-light">
             Sign up with
           </p>
-          <div>
-            <div className="flex items-center justify-center space-x-4 mt-3">
-              <button className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-cyan-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                <FaGithub className="w-6 h-6 mr-3" />
-                Github
-              </button>
-              <button className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-cyan-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                <FaGoogle className="w-6 h-6 mr-3" />
-                Google
-              </button>
-            </div>
-          </div>
+
+          <SocialLogin />
+
         </div>
         <div className="bg-gray-100 rounded-b-lg py-12 px-4 lg:px-24">
           <p className="text-center text-sm text-gray-500 font-light">
@@ -102,6 +102,7 @@ const SignUpForm = () => {
           </form>
         </div>
       </div>
+      <Toaster richColors position="top-center" />
     </div>
   );
 };

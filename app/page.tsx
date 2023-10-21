@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+ 
   return (
     <main className="max-w-7xl mx-auto w-full ">
       <section className="grid grid-cols-1 lg:grid-cols-[4fr,1fr] w-full gap-10">

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FiHome, FiUser, FiSettings, FiLogOut } from "react-icons/fi";
+
 import {
   FaBarsStaggered,
   FaDAndDBeyond,
@@ -13,10 +14,13 @@ import {
 import { RxCross1 } from "react-icons/rx";
 import { Divider, Link } from "@nextui-org/react";
 import { usePathname } from "next/dist/client/components/navigation";
+import { useSession,signOut } from "next-auth/react";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
+  const { status } = useSession();
 
   const userItems = [
     {
@@ -133,19 +137,28 @@ const Sidebar: React.FC = () => {
           {/* TODO : We will do check a user authenticate or not */}
           <Divider className="my-4" />
           <li>
-            <Link
-              className={
-                pathname === "/login"
-                  ? "text-lg   bg-cyan-500 text-white flex space-x-2 items-center p-2 rounded-2xl font-semibold"
-                  : "text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2"
-              }
-              href="/login"
-            >
-              <span className="text-xl">
-                <FaLitecoinSign />
-              </span>
-              <span className="mt-1">Login</span>
-            </Link>
+            {status === "authenticated" ? (
+              <button onClick={()=> signOut()} className="text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2">
+                <span className="text-xl">
+                  <FaSignOutAlt />
+                </span>
+                <span className="mt-1">Logout</span>
+              </button>
+            ) : (
+              <Link
+                className={
+                  pathname === "/login"
+                    ? "text-lg   bg-cyan-500 text-white flex space-x-2 items-center p-2 rounded-2xl font-semibold"
+                    : "text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2"
+                }
+                href="/login"
+              >
+                <span className="text-xl">
+                  <FaLitecoinSign />
+                </span>
+                <span className="mt-1">Login</span>
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

@@ -1,14 +1,19 @@
-import type { NextAuthOptions } from "next-auth"
-import googleProviders from "next-auth/providers/google"
-import CredentialsProviders from "next-auth/providers/credentials"
+import type { NextAuthOptions } from "next-auth";
+import GoogleProviders from "next-auth/providers/google";
+import GithubProviders from "next-auth/providers/github";
+import CredentialsProviders from "next-auth/providers/credentials";
 import prisma from "@/prisma/client";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 
 export const options: NextAuthOptions = {
   providers: [
-    googleProviders({
+    GoogleProviders({
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_KEY as string,
+    }),
+    GithubProviders({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_KEY as string,
     }),
     CredentialsProviders({
       name: "credentials",
@@ -38,7 +43,11 @@ export const options: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: "database",
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/login",
+    signOut: "/login",
   },
   secret: process.env.NEXT_AUTH_SECRET,
 };
