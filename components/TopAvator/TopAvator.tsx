@@ -11,7 +11,7 @@ const TopAvator = () => {
   const {data:session} = useSession();
   const user = session?.user
   return (
-    <div className="w-full bg-gray-50 px-10 lg:px-0  lg:py-6">
+    <div className="w-full bg-gray-50  py-3 lg:px-0  lg:py-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-4 px-3">
           <FiSearch className="text-2xl text-cyan-500" />

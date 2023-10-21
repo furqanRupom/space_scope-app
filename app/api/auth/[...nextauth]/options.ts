@@ -18,7 +18,6 @@ export const options: NextAuthOptions = {
     CredentialsProviders({
       name: "credentials",
       credentials: {},
-
       async authorize(credentials) {
         const { email, password }: any = credentials;
         try {
