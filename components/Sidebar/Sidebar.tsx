@@ -135,11 +135,11 @@ const Sidebar: React.FC = () => {
           <li>
             <Link
               className={
-                pathname === "/authenticate/login"
+                pathname === "/login"
                   ? "text-lg   bg-cyan-500 text-white flex space-x-2 items-center p-2 rounded-2xl font-semibold"
                   : "text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2"
               }
-              href="/authenticate/login"
+              href="/login"
             >
               <span className="text-xl">
                 <FaLitecoinSign />
