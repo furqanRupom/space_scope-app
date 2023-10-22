@@ -14,7 +14,7 @@ import {
 import { RxCross1 } from "react-icons/rx";
 import { Divider, Link } from "@nextui-org/react";
 import { usePathname } from "next/dist/client/components/navigation";
-import { useSession,signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { FaSignOutAlt } from "react-icons/fa";
 
 const Sidebar: React.FC = () => {
@@ -58,11 +58,7 @@ const Sidebar: React.FC = () => {
       logo: <FiUser />,
       route: "/profile",
     },
-    {
-      name: "Create Post",
-      logo: <FaDAndDBeyond />,
-      route: "/createPost",
-    },
+
     {
       name: "Posts",
       logo: <FaPooStorm />,
@@ -138,7 +134,10 @@ const Sidebar: React.FC = () => {
           <Divider className="my-4" />
           <li>
             {status === "authenticated" ? (
-              <button onClick={()=> signOut()} className="text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2">
+              <button
+                onClick={() => signOut()}
+                className="text-lg  text-black hover:text-cyan-500 flex space-x-2 items-center p-2"
+              >
                 <span className="text-xl">
                   <FaSignOutAlt />
                 </span>

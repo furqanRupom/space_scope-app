@@ -45,6 +45,7 @@ const ProfileCard = () => {
             <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
               Message
             </button>
+          
           </div>
         </div>
         <div className="mt-20 text-center border-b pb-12">
