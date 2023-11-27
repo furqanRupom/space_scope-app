@@ -4,14 +4,12 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-
-
 export const POST = async (request:NextRequest) =>{
     try {
         const data = await request.json()
-        console.log(data)
+        console.log(data);
 
-        const {email,title,content} = data
+        const {email,title,content,authorImage} = data
 
         const user = await prisma.user.findUnique({
             where:{
@@ -25,7 +23,8 @@ export const POST = async (request:NextRequest) =>{
                 data:{
                     title:title,
                     content:content,
-                    authorId:id
+                    authorId:id,
+                    authorImage:authorImage
                 }
             })
             return NextResponse.json({ data: createPost }, { status: 201 });

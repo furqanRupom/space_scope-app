@@ -21,19 +21,21 @@ import { toast } from "sonner";
 
 const CreatePost = () => {
   const [user] = useAuthenticateUser();
-  const [,refetch] = usePosts()
+  const [,refetch] = usePosts();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const {register,handleSubmit} = useForm()
+  const {register,handleSubmit} = useForm();
 
 
 
   const onSubmit = async(data:any) =>{
-    const email = user?.email
+    const email = user?.email;
+     const authorImage = user?.image;
 
     const cookData = {
         email,
         title:data?.title,
-        content:data?.content
+        content:data?.content,
+        authorImage
     }
 
      try {
@@ -57,7 +59,7 @@ const CreatePost = () => {
           isReadOnly
           type="email"
           variant="faded"
-          defaultValue="What About New Space?"
+          defaultValue="What is New About Space?"
           className="max-w-3xl text-2xl"
         />
       </div>

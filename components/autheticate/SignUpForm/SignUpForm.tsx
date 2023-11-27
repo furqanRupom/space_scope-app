@@ -9,7 +9,10 @@ import { toast, Toaster } from "sonner";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUpForm = () => {
+
+
   const { register, reset, handleSubmit } = useForm();
+  
   const onSubmit = async (data: {}) => {
     try {
       const { name, email, password }: any = data;
